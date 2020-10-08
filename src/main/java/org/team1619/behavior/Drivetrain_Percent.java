@@ -54,8 +54,6 @@ public class Drivetrain_Percent implements Behavior {
 
 		fSharedOutputValues.setNumeric("opn_drivetrain_left", "percent", leftMotorSpeed);
 		fSharedOutputValues.setNumeric("opn_drivetrain_right", "percent", rightMotorSpeed);
-
-
 		fSharedOutputValues.setBoolean("opb_drivetrain_gear_shifter", gearShiftButtonValue);
 
 	}

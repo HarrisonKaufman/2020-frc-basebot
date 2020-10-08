@@ -5,8 +5,8 @@ solenoid_double:
     device_number_slave: 6
 
   opb_collector_extend:
-    device_number_master: 5
-    device_number_slave: 2
+    device_number_master: 2
+    device_number_slave: 5
 
   opb_hopper_kicker:
     device_number_master: 3

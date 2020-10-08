@@ -45,6 +45,12 @@ public class ModelFactory_Behaviors extends AbstractModelFactory {
 				return new Hopper_Zero(fSharedInputValues, fSharedOutputValues, config, fRobotConfiguration);
 			case "bh_hopper_states":
 				return new Hopper_States(fSharedInputValues, fSharedOutputValues, config, fRobotConfiguration);
+
+			case "bh_elevator_zero":
+				return new Elevator_Zero(fSharedInputValues, fSharedOutputValues, config, fRobotConfiguration);
+			case "bh_elevator_states":
+				return new Elevator_States(fSharedInputValues, fSharedOutputValues, config, fRobotConfiguration);
+
 			default:
 				throw new ConfigurationException("Behavior " + name + " does not exist.");
 		}

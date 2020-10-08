@@ -57,7 +57,15 @@ public class Hopper_Zero implements Behavior {
 			fSharedInputValues.setBoolean("ipb_hopper_has_been_zeroed", true);
 			sLogger.debug("Hopper zero -> Zeroed");
 
+
+
 		}
+		if (fTimeoutTimer.isDone() && !fSharedInputValues.getBoolean("ipb_hopper_has_been_zeroed")) {
+			fTimeoutTimer.reset();
+			sLogger.error("Hopper zero -> Timed out");
+			fSharedInputValues.setBoolean("ipb_hopper_has_been_zeroed", true);
+		}
+
 	}
 
 	@Override
@@ -68,12 +76,9 @@ public class Hopper_Zero implements Behavior {
 	@Override
 	public boolean isDone() {
 
-	 if (fTimeoutTimer.isDone() && fSharedInputValues.getBoolean("ipb_hopper_has_been_zeroed")) {
-		fSharedOutputValues.setNumeric("opn_hopper", "percent", 0.0);
-		fSharedInputValues.setBoolean("ipb_hopper_zero_has_timed_out", true);
-		sLogger.debug("Hopper Zero -> Timed out");
-	}
+
 		return fSharedInputValues.getBoolean("ipb_hopper_has_been_zeroed");
+
 	}
 
 	@Override

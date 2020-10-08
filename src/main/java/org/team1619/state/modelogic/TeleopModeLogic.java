@@ -18,10 +18,10 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	boolean mIsStowed = false;
 	boolean mRollersOn= false;
 
-	private boolean floorCollect = false;
-	private boolean prime = false;
-	private boolean shoot = false;
-	private boolean protect = false;
+	private boolean mFloorCollect = false;
+	private boolean mPrime = false;
+	private boolean mShoot = false;
+	private boolean mProtect = false;
 
 
 
@@ -37,10 +37,10 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	public void initialize() {
 		sLogger.info("***** TELEOP *****");
 
-		floorCollect = false;
-		prime = false;
-		shoot = false;
-		protect = false;
+		mFloorCollect = false;
+		mPrime = false;
+		mShoot = false;
+		mProtect = false;
 
 
 		}
@@ -68,34 +68,29 @@ public class TeleopModeLogic extends AbstractModeLogic {
 		}
 
 			if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_trigger")) {
-				floorCollect = !floorCollect;
-				prime = false;
-				shoot = false;
-				protect = false;
+				mFloorCollect = !mFloorCollect;
+				mPrime = false;
+				mShoot = false;
+				mProtect = false;
 			}
 			if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_bumper")) {
-				floorCollect = false;
-				prime = false;
-				shoot = false;
-				protect = true;
+				mFloorCollect = false;
+				mPrime = false;
+				mShoot = false;
+				mProtect = true;
 			}
-			if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_right_trigger")) {
-				floorCollect = false;
-				prime = false;
-				shoot = true;
-				protect = false;
+			if (fSharedInputValues.getBooleanFallingEdge("ipb_operator_right_trigger")) {
+				mFloorCollect = false;
+				mPrime = false;
+				mShoot = true;
+				mProtect = false;
 			}
-			if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_right_trigger")){
-				floorCollect = false;
-				prime = false;
-				shoot = false;
-				protect = false;
-			}
+
 			if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_right_bumper")) {
-				floorCollect = false;
-				prime = true;
-				shoot = false;
-				protect = false;
+				mFloorCollect = false;
+				mPrime = true;
+				mShoot = false;
+				mProtect = false;
 			}
 
 
@@ -122,29 +117,23 @@ public class TeleopModeLogic extends AbstractModeLogic {
 			case "st_collector_zero":
 				return !fSharedInputValues.getBoolean("ipb_collector_has_been_zeroed");
 
-			case "st_collector_retract":
-				return mIsStowed && !mRollersOn;
-
-			case "st_collector_floor_intake":
-				return !mIsStowed && mRollersOn;
-
-			case "st_collector_extend":
-				return !mIsStowed && !mRollersOn;
-
 			case "st_hopper_zero":
 				return !fSharedInputValues.getBoolean("ipb_hopper_has_been_zeroed");
 
+			case"st_elevator_zero":
+				return !fSharedInputValues.getBoolean("ipb_elevator_has_been_zeroed");
+
 			case "pl_floor_intake":
-				return floorCollect && !prime && !shoot && !protect;
+				return mFloorCollect;
 
 			case "pl_prime":
-				return !floorCollect && prime && !shoot && !protect;
+				return mPrime;
 
 			case "pl_shoot":
-				return !floorCollect && !prime && shoot && !protect;
+				return mShoot;
 
 			case "pl_protect":
-				return !floorCollect && !prime && !shoot && protect;
+				return mProtect;
 
 
 
@@ -161,16 +150,16 @@ public class TeleopModeLogic extends AbstractModeLogic {
 		switch (name) {
 
 			case "pl_floor_intake":
-				return !floorCollect;
+				return !mFloorCollect;
 
 			case "pl_prime":
-				return !prime;
+				return !mPrime;
 
 			case "pl_shoot":
-				return !shoot;
+				return !mShoot;
 
 			case "pl_protect":
-				return !protect;
+				return !mProtect;
 
 
 			default:

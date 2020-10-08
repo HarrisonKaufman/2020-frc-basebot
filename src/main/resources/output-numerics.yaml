@@ -33,6 +33,14 @@ talon:
     device_number: 4
     inverted: true
 
+  opn_elevator_primary:
+    device_number: 9
+    inverted: false
+
+  opn_elevator_follower:
+    device_number: 8
+    inverted: false
+
 
 victor:
 
@@ -45,3 +53,7 @@ motor_group:
   opn_drivetrain_left:
     master: opn_drivetrain_left_primary
     followers: [opn_drivetrain_left_follower]
+
+  opn_elevator:
+    master: opn_elevator_primary
+    followers: [opn_elevator_follower]
