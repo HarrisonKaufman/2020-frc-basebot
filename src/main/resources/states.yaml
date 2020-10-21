@@ -33,6 +33,7 @@ single_state:
       hopper_speed: 0.0
       kicker_position: false
       timeout_time: 500
+      elevator_threshold: 0.1
 
   st_hopper_home:
     behavior: bh_hopper_states
@@ -46,21 +47,21 @@ single_state:
     behavior_config:
       hopper_speed: 0.5
       kicker_position: false
-      timeout_time: 0.0
+      timeout_time: 0
 
   st_hopper_shoot:
     behavior: bh_hopper_states
     behavior_config:
       hopper_speed: 0.2
       kicker_position: true
-      timeout_time: 0.0
+      timeout_time: 0
 
   st_hopper_stop:
     behavior: bh_hopper_states
     behavior_config:
       hopper_speed: 0.0
       kicker_position: false
-      timeout_time: 0.0
+      timeout_time: 0
 
   st_elevator_zero:
     behavior: bh_elevator_zero
@@ -88,7 +89,6 @@ single_state:
     behavior: bh_elevator_states
     behavior_config:
       speed: 0.0
-
 
 
 

@@ -14,7 +14,8 @@ general:
 
     ss_collector:
       priority_level_2: [st_collector_zero]
-      priority_level_1: [st_collector_floor_intake, st_collector_extend, st_collector_retract]
+      priority_level_1: [st_collector_floor_intake, st_collector_extend]
+      default: [st_collector_retract]
 
     ss_hopper:
       priority_level_2: [st_hopper_zero]

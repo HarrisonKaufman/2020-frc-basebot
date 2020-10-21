@@ -15,8 +15,6 @@ public class TeleopModeLogic extends AbstractModeLogic {
 
 	private static final Logger sLogger = LogManager.getLogger(TeleopModeLogic.class);
 
-	boolean mIsStowed = false;
-	boolean mRollersOn= false;
 
 	private boolean mFloorCollect = false;
 	private boolean mPrime = false;
@@ -41,31 +39,12 @@ public class TeleopModeLogic extends AbstractModeLogic {
 		mPrime = false;
 		mShoot = false;
 		mProtect = false;
-
-
 		}
-
-
 
 
 	@Override
 	public void update() {
 
-
-		 if(fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_bumper")) {
-
-			mRollersOn = false;
-			mIsStowed = true;
-
-
-		}
-
-		if(fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_trigger") ) {
-
-			mRollersOn = !mRollersOn;
-			mIsStowed = false;
-
-		}
 
 			if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_left_trigger")) {
 				mFloorCollect = !mFloorCollect;
@@ -79,14 +58,14 @@ public class TeleopModeLogic extends AbstractModeLogic {
 				mShoot = false;
 				mProtect = true;
 			}
-			if (fSharedInputValues.getBooleanFallingEdge("ipb_operator_right_trigger")) {
+			if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_right_trigger")) {
 				mFloorCollect = false;
 				mPrime = false;
 				mShoot = true;
 				mProtect = false;
 			}
 
-			if (fSharedInputValues.getBooleanRisingEdge("ipb_operator_right_bumper")) {
+			if (fSharedInputValues.getBooleanFallingEdge("ipb_operator_right_bumper")) {
 				mFloorCollect = false;
 				mPrime = true;
 				mShoot = false;
@@ -123,8 +102,8 @@ public class TeleopModeLogic extends AbstractModeLogic {
 			case"st_elevator_zero":
 				return !fSharedInputValues.getBoolean("ipb_elevator_has_been_zeroed");
 
-			case "pl_floor_intake":
-				return mFloorCollect;
+			//case "pl_floor_intake":
+			//	return mFloorCollect;
 
 			case "pl_prime":
 				return mPrime;
@@ -136,10 +115,6 @@ public class TeleopModeLogic extends AbstractModeLogic {
 				return mProtect;
 
 
-
-
-
-
 			default:
 				return false;
 		}
@@ -149,8 +124,8 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	public boolean isDone(String name, State state) {
 		switch (name) {
 
-			case "pl_floor_intake":
-				return !mFloorCollect;
+			//case "pl_floor_intake":
+			//	return !mFloorCollect;
 
 			case "pl_prime":
 				return !mPrime;

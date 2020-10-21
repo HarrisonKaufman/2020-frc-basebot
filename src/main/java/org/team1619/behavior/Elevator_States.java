@@ -52,7 +52,6 @@ public class Elevator_States implements Behavior {
         mElevatorSpeed = config.getDouble("speed");
         mStateName = stateName;
 
-        fIsDoneTimer.reset();
         fIsDoneTimer.start(1000);
 
        mCurrentSpeed = fSharedInputValues.getNumeric("opn_elevator");
@@ -89,9 +88,6 @@ public class Elevator_States implements Behavior {
     @Override
     public boolean isDone() {
         if (mBeamSensor) {
-            if (fSharedInputValues.getBoolean("ipb_beam_sensor_override")) {
-                return false;
-            }
             return fSharedInputValues.getBoolean("ipb_elevator_beam_sensor");
         } else {
             return true;

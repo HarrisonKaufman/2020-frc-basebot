@@ -22,6 +22,7 @@ public class Elevator_Zero implements Behavior {
     private final OutputValues fSharedOutputValues;
     private final Timer fTimeoutTimer;
 
+    private double mThreshold;
     private int mTimeoutTime;
     public Elevator_Zero(InputValues inputValues, OutputValues outputValues, Config config, RobotConfiguration robotConfiguration) {
         fSharedInputValues = inputValues;
@@ -29,6 +30,7 @@ public class Elevator_Zero implements Behavior {
         fTimeoutTimer = new Timer();
 
         mTimeoutTime = 0;
+        mThreshold = 0;
     }
 
     @Override
@@ -37,8 +39,10 @@ public class Elevator_Zero implements Behavior {
 
         mTimeoutTime = config.getInt("zeroing_timeout_time");
 
-        fTimeoutTimer.reset();
+
         fTimeoutTimer.start(mTimeoutTime);
+
+        mThreshold = config.getDouble("elevator_threshold", 0);
     }
 
     @Override
@@ -46,10 +50,15 @@ public class Elevator_Zero implements Behavior {
         if (!fSharedInputValues.getBoolean("ipb_elevator_has_been_zeroed")) {
             fSharedOutputValues.setOutputFlag("opn_elevator", "zero");
 
-            if (Math.abs(fSharedInputValues.getNumeric("ipn_elevator_position")) == 0.0) {
+            if (Math.abs(fSharedInputValues.getNumeric("ipn_elevator_position")) == mThreshold) {
                 sLogger.debug("Elevator Zero -> Zeroed");
                 fSharedInputValues.setBoolean("ipb_elevator_has_been_zeroed", true);
             }
+        }
+
+        if (fTimeoutTimer.isDone() && !fSharedInputValues.getBoolean("ipb_elevator_has_been_zeroed")) {
+            fTimeoutTimer.reset();
+            sLogger.error("Elevator Zero -> Timed Out");
         }
     }
 
@@ -60,11 +69,8 @@ public class Elevator_Zero implements Behavior {
 
     @Override
     public boolean isDone() {
-        if (fTimeoutTimer.isDone() && !fSharedInputValues.getBoolean("ipb_elevator_has_been_zeroed")) {
-            fTimeoutTimer.reset();
-            sLogger.error("Elevator Zero -> Timed Out");
-        }
-        return fSharedInputValues.getBoolean("ipb_elevator_has_been_zeroed") || fTimeoutTimer.isDone();
+
+        return fSharedInputValues.getBoolean("ipb_elevator_has_been_zeroed");
     }
 
     @Override
@@ -72,3 +78,4 @@ public class Elevator_Zero implements Behavior {
         return sSubsystems;
     }
 }
+
