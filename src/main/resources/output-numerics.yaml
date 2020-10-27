@@ -1,5 +1,47 @@
 talon:
 
+  opn_drivetrain_left_primary:
+    device_number: 0
+    inverted: true
+    feedback_device: internal_encoder
+    read_position: true
+    read_velocity: true
+
+  opn_drivetrain_left_follower:
+    device_number: 1
+    inverted: true
+
+  opn_drivetrain_right_primary:
+    device_number: 14
+    inverted: false
+    feedback_device: internal_encoder
+    read_position: true
+    read_velocity: true
+
+  opn_drivetrain_right_follower:
+    device_number: 15
+    inverted: false
+    feedback_device: internal_encoder
+    read_position: true
+    read_velocity: true
+
+  opn_collector_rollers:
+    device_number: 5
+    inverted: false
+
+  opn_hopper:
+    device_number: 4
+    inverted: true
+
+
 victor:
 
 motor_group:
+
+  opn_drivetrain_right:
+    master: opn_drivetrain_right_primary
+    followers: [opn_drivetrain_right_follower]
+
+  opn_drivetrain_left:
+    master: opn_drivetrain_left_primary
+    followers: [opn_drivetrain_left_follower]

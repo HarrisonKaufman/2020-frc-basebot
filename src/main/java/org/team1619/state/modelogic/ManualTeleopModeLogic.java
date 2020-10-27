@@ -37,6 +37,9 @@ public class ManualTeleopModeLogic extends AbstractModeLogic {
 	@Override
 	public boolean isReady(String name) {
 		switch (name) {
+
+			case "st_drivetrain_percent":
+				return true;
 			default:
 				return false;
 		}

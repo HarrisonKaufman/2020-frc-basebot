@@ -1,7 +1,83 @@
 single_state:
 
+  st_drivetrain_percent:
+    behavior: bh_drivetrain_percent
+
+  st_collector_zero:
+    behavior: bh_collector_zero
+    behavior_config:
+      delay_time: 500
+      solenoid_position: true
+
+  st_collector_floor_intake:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: true
+      roller_speed: 0.9
+
+  st_collector_retract:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: false
+      roller_speed: 0.0
+
+  st_collector_extend:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: true
+      roller_speed: 0.0
+
+  st_hopper_zero:
+    behavior: bh_hopper_zero
+    behavior_config:
+      hopper_speed: 0.0
+      kicker_position: false
+      timeout_time: 500
+
+  st_hopper_home:
+    behavior: bh_hopper_states
+    behavior_config:
+      hopper_speed: 0.2
+      kicker_position: false
+      timeout_time: 500
+
+  st_hopper_collect:
+    behavior: bh_hopper_states
+    behavior_config:
+      hopper_speed: 0.5
+      kicker_position: false
+      timeout_time: 0.0
+
+  st_hopper_shoot:
+    behavior: bh_hopper_states
+    behavior_config:
+      hopper_speed: 0.2
+      kicker_position: true
+      timeout_time: 0.0
+
+  st_hopper_stop:
+    behavior: bh_hopper_states
+    behavior_config:
+      hopper_speed: 0.0
+      kicker_position: false
+      timeout_time: 0.0
+
+
+
+
 done_for_time_state:
 
 parallel_state:
+  pl_floor_intake:
+    foreground_states: [st_collector_floor_intake, st_hopper_collect]
+
+  pl_prime:
+    foreground_states: [st_collector_extend, st_hopper_home]
+
+  pl_shoot:
+    foreground_states: [st_collector_extend, st_hopper_shoot]
+
+  pl_protect:
+    foreground_states: [st_collector_retract, st_hopper_stop]
 
 sequencer_state:

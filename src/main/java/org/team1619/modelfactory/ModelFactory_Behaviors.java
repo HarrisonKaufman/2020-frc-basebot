@@ -32,7 +32,19 @@ public class ModelFactory_Behaviors extends AbstractModelFactory {
 
 		switch (name) {
 
+			case "bh_drivetrain_percent":
+				return new Drivetrain_Percent(fSharedInputValues, fSharedOutputValues, config, fRobotConfiguration);
 			// State not found
+
+			case "bh_collector_zero":
+				return new Collector_Zero(fSharedInputValues, fSharedOutputValues, config, fRobotConfiguration);
+			case "bh_collector_states":
+				return new Collector_States(fSharedInputValues, fSharedOutputValues, config, fRobotConfiguration);
+
+			case "bh_hopper_zero":
+				return new Hopper_Zero(fSharedInputValues, fSharedOutputValues, config, fRobotConfiguration);
+			case "bh_hopper_states":
+				return new Hopper_States(fSharedInputValues, fSharedOutputValues, config, fRobotConfiguration);
 			default:
 				throw new ConfigurationException("Behavior " + name + " does not exist.");
 		}

@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/2020-frc-basebot.iml" filepath="$PROJECT_DIR$/.idea/2020-frc-basebot.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/2020-frc-basebot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/2020-frc-basebot.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/2020-frc-basebot.test.iml" filepath="$PROJECT_DIR$/.idea/modules/2020-frc-basebot.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.team1619.2020-frc-basebot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.team1619.2020-frc-basebot.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.team1619.2020-frc-basebot.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.team1619.2020-frc-basebot.test.iml" />
     </modules>
   </component>
 </project>

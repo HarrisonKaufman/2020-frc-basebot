@@ -7,8 +7,24 @@ general:
     sequences:
 
     parallels:
+      priority_level_1: [pl_floor_intake, pl_shoot, pl_protect, pl_prime]
 
-  subsystems: []
+    ss_drivetrain:
+      default: [st_drivetrain_percent]
+
+    ss_collector:
+      priority_level_2: [st_collector_zero]
+      priority_level_1: [st_collector_floor_intake, st_collector_extend, st_collector_retract]
+
+    ss_hopper:
+      priority_level_2: [st_hopper_zero]
+      priority_level_1: [st_hopper_home, st_hopper_collect, st_hopper_shoot]
+      default: [st_hopper_stop]
+
+
+  subsystems: [ss_drivetrain, ss_collector, ss_hopper]
+
+
 
   input_booleans: [
     ipb_driver_a, ipb_driver_b, ipb_driver_y, ipb_driver_x, ipb_driver_left_bumper, ipb_driver_right_bumper, ipb_driver_left_trigger, ipb_driver_right_trigger, ipb_driver_dpad_up, ipb_driver_dpad_down, ipb_driver_dpad_left, ipb_driver_dpad_right, ipb_driver_back, ipb_driver_start, ipb_driver_left_stick_button, ipb_driver_right_stick_button,
@@ -17,15 +33,15 @@ general:
   ]
 
   input_numerics: [
-    ipn_driver_left_y, ipn_driver_left_x, ipn_driver_right_y, ipn_driver_right_x,
-    ipn_operator_left_y, ipn_operator_left_x, ipn_operator_right_y, ipn_operator_right_x
+    ipn_driver_left_y, ipn_driver_right_x,
   ]
 
   input_vectors: []
 
-  output_numerics: []
+  output_numerics: [opn_drivetrain_right, opn_drivetrain_left, opn_collector_rollers, opn_hopper]
 
-  output_booleans: []
+  output_booleans: [opb_drivetrain_gear_shifter, opb_collector_extend, opb_hopper_kicker]
+
 
 
 global_timing:
@@ -36,6 +52,19 @@ global_timing:
   frame_time_threshold_webdashboard_service: 80
   frame_cycle_time_threshold_core_thread: 80
   frame_cycle_time_threshold_info_thread: 80
+
+global_drivetrain:
+  x: ipn_driver_right_x
+  y: ipn_driver_left_y
+  gear_shift_button: ipb_driver_left_trigger
+
+global_collector:
+  delay_time: 500
+
+global_hopper:
+  timeout_time: 500
+  kicker_position: opb_hopper_kicker
+
 
 log:
 
