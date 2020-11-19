@@ -27,8 +27,13 @@ general:
       priority_level_1: [st_elevator_load, st_elevator_prime, st_elevator_shoot]
       default: [st_elevator_stop]
 
+    ss_flywheel:
+      priority_level_2: [st_flywheel_zero]
+      priority_level_1: [st_flywheel_prime, st_flywheel_shoot]
+      default: [st_flywheel_stop]
 
-  subsystems: [ss_drivetrain, ss_collector, ss_hopper, ss_elevator]
+
+  subsystems: [ss_drivetrain, ss_collector, ss_hopper, ss_elevator, ss_flywheel]
 
 
 
@@ -44,7 +49,7 @@ general:
 
   input_vectors: []
 
-  output_numerics: [opn_drivetrain_right, opn_drivetrain_left, opn_collector_rollers, opn_hopper, opn_elevator]
+  output_numerics: [opn_drivetrain_right, opn_drivetrain_left, opn_collector_rollers, opn_hopper, opn_elevator, opn_flywheel]
 
   output_booleans: [opb_drivetrain_gear_shifter, opb_collector_extend, opb_hopper_kicker]
 
@@ -76,6 +81,11 @@ global_elevator:
   increment_down_button: ipb_operator_a
   initial_speed: 0.0
   increment: 0.1
+
+global_flywheel:
+  increment_button: ipb_operator_b
+  decrement_button: ipb_operator_x
+  increment_amount: 0.1
 
 
 

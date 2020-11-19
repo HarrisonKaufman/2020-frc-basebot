@@ -22,9 +22,7 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	private boolean mProtect = false;
 
 
-
-
-
+	
 
 
 	public TeleopModeLogic(InputValues inputValues, RobotConfiguration robotConfiguration) {
@@ -88,7 +86,6 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	public boolean isReady(String name) {
 		switch (name) {
 
-			//collector
 
 			case "st_drivetrain_percent":
 				return true;
@@ -99,11 +96,14 @@ public class TeleopModeLogic extends AbstractModeLogic {
 			case "st_hopper_zero":
 				return !fSharedInputValues.getBoolean("ipb_hopper_has_been_zeroed");
 
-			case"st_elevator_zero":
+			case "st_elevator_zero":
 				return !fSharedInputValues.getBoolean("ipb_elevator_has_been_zeroed");
 
-			//case "pl_floor_intake":
-			//	return mFloorCollect;
+			case "st_flywheel_zero":
+				return !fSharedInputValues.getBoolean("ipb_flywheel_has_been_zeroed");
+
+			case "pl_floor_intake":
+				return mFloorCollect;
 
 			case "pl_prime":
 				return mPrime;
@@ -124,8 +124,8 @@ public class TeleopModeLogic extends AbstractModeLogic {
 	public boolean isDone(String name, State state) {
 		switch (name) {
 
-			//case "pl_floor_intake":
-			//	return !mFloorCollect;
+			case "pl_floor_intake":
+				return !mFloorCollect;
 
 			case "pl_prime":
 				return !mPrime;
