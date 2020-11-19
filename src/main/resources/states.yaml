@@ -33,6 +33,7 @@ single_state:
       hopper_speed: 0.0
       kicker_position: false
       timeout_time: 500
+      elevator_threshold: 0.1
 
   st_hopper_home:
     behavior: bh_hopper_states
@@ -46,21 +47,80 @@ single_state:
     behavior_config:
       hopper_speed: 0.5
       kicker_position: false
-      timeout_time: 0.0
+      timeout_time: 0
 
   st_hopper_shoot:
     behavior: bh_hopper_states
     behavior_config:
       hopper_speed: 0.2
       kicker_position: true
-      timeout_time: 0.0
+      timeout_time: 0
 
   st_hopper_stop:
     behavior: bh_hopper_states
     behavior_config:
       hopper_speed: 0.0
       kicker_position: false
-      timeout_time: 0.0
+      timeout_time: 0
+
+  st_elevator_zero:
+    behavior: bh_elevator_zero
+    behavior_config:
+      zeroing_timeout_time: 500
+
+
+  st_elevator_load:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: 0.4
+      beam_sensor: true
+
+  st_elevator_prime:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: -0.2
+
+  st_elevator_shoot:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: 0.8
+
+  st_elevator_stop:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: 0.0
+
+  st_flywheel_zero:
+    behavior: bh_flywheel_zero
+    behavior_config:
+      timeout_time: 500
+
+  st_flywheel_prime:
+    behavior: bh_flywheel_states
+    behavior_config:
+      speed: 0.9
+      velocity: 6000
+      velocity_profile: pr_prime
+      prime: true
+      up_to_velocity: 5500
+      allow_adjust: true
+
+  st_flywheel_shoot:
+    behavior: bh_flywheel_states
+    behavior_config:
+      speed: 0.9
+      velocity: 6000
+      velocity_profile: pr_shoot
+      allow_adjust: true
+
+  st_flywheel_stop:
+    behavior: bh_flywheel_states
+    behavior config:
+      speed: 0.0
+      velocity: 0
+      coast: true
+      allow_adjust: false
+
 
 
 
@@ -69,13 +129,13 @@ done_for_time_state:
 
 parallel_state:
   pl_floor_intake:
-    foreground_states: [st_collector_floor_intake, st_hopper_collect]
+    foreground_states: [st_collector_floor_intake, st_hopper_collect, st_elevator_load]
 
   pl_prime:
-    foreground_states: [st_collector_extend, st_hopper_home]
+    foreground_states: [st_collector_extend, st_hopper_home, st_elevator_prime, st_flywheel_prime]
 
   pl_shoot:
-    foreground_states: [st_collector_extend, st_hopper_shoot]
+    foreground_states: [st_collector_extend, st_hopper_shoot, st_elevator_shoot, st_flywheel_shoot]
 
   pl_protect:
     foreground_states: [st_collector_retract, st_hopper_stop]

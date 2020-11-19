@@ -33,6 +33,38 @@ talon:
     device_number: 4
     inverted: true
 
+  opn_elevator_primary:
+    device_number: 9
+    inverted: false
+
+  opn_elevator_follower:
+    device_number: 8
+    inverted: false
+
+  opn_flywheel_primary:
+    device_number: 12
+    feedback_device: internal_encoder
+    read_position: true
+    read_velocity: true
+    position_scalar: 0.00097943
+    velocity_scalar: 0.05876592
+    inverted: false
+    profiles:
+      pr_prime:
+        f: 0.045
+        p: 1.0
+        i: 0.0
+        d: 0.0
+      pr_shoot:
+        f: 0.045
+        p: 1.0
+        i: 0.0
+        d: 0.0
+
+  opn_flywheel_follower:
+    device_number: 3
+    inverted: true
+
 
 victor:
 
@@ -45,3 +77,11 @@ motor_group:
   opn_drivetrain_left:
     master: opn_drivetrain_left_primary
     followers: [opn_drivetrain_left_follower]
+
+  opn_elevator:
+    master: opn_elevator_primary
+    followers: [opn_elevator_follower]
+
+  opn_flywheel:
+    master: opn_flywheel_primary
+    followers: [opn_flywheel_follower]

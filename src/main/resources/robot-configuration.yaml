@@ -14,15 +14,26 @@ general:
 
     ss_collector:
       priority_level_2: [st_collector_zero]
-      priority_level_1: [st_collector_floor_intake, st_collector_extend, st_collector_retract]
+      priority_level_1: [st_collector_floor_intake, st_collector_extend]
+      default: [st_collector_retract]
 
     ss_hopper:
       priority_level_2: [st_hopper_zero]
       priority_level_1: [st_hopper_home, st_hopper_collect, st_hopper_shoot]
       default: [st_hopper_stop]
 
+    ss_elevator:
+      priority_level_2: [st_elevator_zero]
+      priority_level_1: [st_elevator_load, st_elevator_prime, st_elevator_shoot]
+      default: [st_elevator_stop]
 
-  subsystems: [ss_drivetrain, ss_collector, ss_hopper]
+    ss_flywheel:
+      priority_level_2: [st_flywheel_zero]
+      priority_level_1: [st_flywheel_prime, st_flywheel_shoot]
+      default: [st_flywheel_stop]
+
+
+  subsystems: [ss_drivetrain, ss_collector, ss_hopper, ss_elevator, ss_flywheel]
 
 
 
@@ -38,7 +49,7 @@ general:
 
   input_vectors: []
 
-  output_numerics: [opn_drivetrain_right, opn_drivetrain_left, opn_collector_rollers, opn_hopper]
+  output_numerics: [opn_drivetrain_right, opn_drivetrain_left, opn_collector_rollers, opn_hopper, opn_elevator, opn_flywheel]
 
   output_booleans: [opb_drivetrain_gear_shifter, opb_collector_extend, opb_hopper_kicker]
 
@@ -62,8 +73,20 @@ global_collector:
   delay_time: 500
 
 global_hopper:
-  timeout_time: 500
   kicker_position: opb_hopper_kicker
+  hopper_speed: opn_hopper
+
+global_elevator:
+  increment_up_button: ipb_operator_y
+  increment_down_button: ipb_operator_a
+  initial_speed: 0.0
+  increment: 0.1
+
+global_flywheel:
+  increment_button: ipb_operator_b
+  decrement_button: ipb_operator_x
+  increment_amount: 0.1
+
 
 
 log:
